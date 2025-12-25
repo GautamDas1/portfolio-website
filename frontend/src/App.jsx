@@ -24,7 +24,10 @@ const App = () => {
 
   useEffect(() => {
     const query = `{
-      "about": *[_type == "about" && defined(name)][0],
+     "about": *[_type == "about" && defined(name)][0]{
+        ...,
+        "resumeURL": resume.asset->url
+      },
       "projects": *[_type == "projects"],
       "skills": *[_type == "skills"],
       "education": *[_type == "education"] | order(startDate desc),
